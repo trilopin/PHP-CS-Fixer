@@ -75,7 +75,7 @@ class MethodArgumentSpaceFixer extends AbstractFixer
             if ($content === '') {
                 $content = ' ';
             }
-            if ($content!==$tokens[$index + 1]->getContent()) {
+            if ($content !== $tokens[$index + 1]->getContent()) {
                 $tokens[$index + 1] = new Token(array(T_WHITESPACE, $content));
             }
         }
