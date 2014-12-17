@@ -82,7 +82,6 @@ class MethodArgumentSpaceFixer extends AbstractFixer
         } else {
             $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
         }
-
     }
 
     /**
