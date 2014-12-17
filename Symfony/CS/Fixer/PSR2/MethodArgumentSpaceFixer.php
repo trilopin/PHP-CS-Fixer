@@ -83,10 +83,6 @@ class MethodArgumentSpaceFixer extends AbstractFixer
             $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
         }
 
-        // add space after comma if not exist
-        if (!$tokens[$index + 1]->isWhitespace()) {
-            $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
-        }
     }
 
     /**
