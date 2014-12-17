@@ -72,10 +72,10 @@ class MethodArgumentSpaceFixer extends AbstractFixer
         // drop additional spaces after comma if exists
         if ($tokens[$index + 1]->isWhitespace()) {
             $content = ltrim($tokens[$index + 1]->getContent(), ' ');
-            if($content === '') {
+            if ($content === '') {
                 $content = ' ';
             }
-            if($content!==$tokens[$index + 1]->getContent()) {
+            if ($content!==$tokens[$index + 1]->getContent()) {
                 $tokens[$index + 1] = new Token(array(T_WHITESPACE, $content));
             }
         }
