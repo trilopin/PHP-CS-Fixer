@@ -84,7 +84,6 @@ class MethodArgumentSpaceFixer extends AbstractFixer
         if (!$tokens[$index + 1]->isWhitespace()) {
             $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
         }
-
     }
 
     /**
