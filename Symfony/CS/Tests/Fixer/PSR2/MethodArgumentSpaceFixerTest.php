@@ -34,20 +34,40 @@ class MethodArgumentSpaceFixerTest extends AbstractFixerTestBase
                 '<?php function xyz($a=10, $b=20, $c=30) {',
                 '<?php function xyz($a=10,$b=20,$c=30) {',
             ),
+            // test method arguments with multiple spaces
+            array(
+                '<?php function xyz($a=10, $b=20, $c=30) {',
+                '<?php function xyz($a=10,         $b=20 , $c=30) {',
+            ),
             // test method call
             array(
                 '<?php xyz($a=10, $b=20, $c=30);',
                 '<?php xyz($a=10 ,$b=20,$c=30);',
+            ),
+            // test method call with multiple spaces
+            array(
+                '<?php xyz($a=10, $b=20, $c=30);',
+                '<?php xyz($a=10 , $b=20 ,          $c=30);',
             ),
             // test method call
             array(
                 '<?php xyz($a=10, $b=20, $this->foo(), $c=30);',
                 '<?php xyz($a=10,$b=20 ,$this->foo() ,$c=30);',
             ),
+            // test method call with multiple spaces
+            array(
+                '<?php xyz($a=10, $b=20, $this->foo(), $c=30);',
+                '<?php xyz($a=10,$b=20 ,         $this->foo() ,$c=30);',
+            ),
             // test receiving data in list context with omitted values
             array(
                 '<?php list($a, $b, , , $c) = foo();',
                 '<?php list($a, $b,, ,$c) = foo();',
+            ),
+            // test receiving data in list context with omitted values and multiple spaces
+            array(
+                '<?php list($a, $b, , , $c) = foo();',
+                '<?php list($a, $b,,    ,$c) = foo();',
             ),
             // skip array
             array(
