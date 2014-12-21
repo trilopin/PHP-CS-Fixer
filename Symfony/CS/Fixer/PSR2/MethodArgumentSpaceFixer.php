@@ -69,15 +69,20 @@ class MethodArgumentSpaceFixer extends AbstractFixer
             }
         }
 
-        // after comma: must have only one space (except newline)
         $nextToken = $tokens[$index + 1];
+        $afterNextToken = $tokens[$index + 2];
+
+        // after comma: must have only one space
+        //              except newline and multiline comments
         if ($nextToken->isWhitespace()) {
-            $newContent = ltrim($nextToken->getContent(), " \t");
-            if ('' === $newContent) {
-                $newContent = ' ';
-            }
-            if ($newContent !== $nextToken->getContent()) {
-                $nextToken->setContent($newContent);
+            if (!$afterNextToken->isComment()) {
+                $newContent = ltrim($nextToken->getContent(), " \t");
+                if ('' === $newContent) {
+                    $newContent = ' ';
+                }
+                if ($newContent !== $nextToken->getContent()) {
+                    $nextToken->setContent($newContent);
+                }
             }
         } else {
             $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
