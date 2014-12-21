@@ -52,17 +52,15 @@ class MethodArgumentSpaceFixerTest extends AbstractFixerTestBase
             // test method call with tab
             array(
                 '<?php xyz($a=10, $b=20, $c=30);',
-                sprintf('<?php xyz($a=10 , $b=20 ,%s $c=30);', "\t"),
+                "<?php xyz(\$a=10 , \$b=20 ,\t \$c=30);"
             ),
             // test method call with \n not affected
             array(
-                sprintf('<?php xyz($a=10, $b=20,%s                    $c=30);', "\n"),
-
+                "<?php xyz(\$a=10, \$b=20,\n                    \$c=30);"
             ),
             // test method call with \r\n not affected
             array(
-                sprintf('<?php xyz($a=10, $b=20,%s                    $c=30);', "\r\n"),
-
+                "<?php xyz(\$a=10, \$b=20,\r\n                    \$c=30);"
             ),
             // test method call
             array(
