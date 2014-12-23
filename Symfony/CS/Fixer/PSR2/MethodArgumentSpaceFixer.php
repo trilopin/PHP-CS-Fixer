@@ -70,23 +70,33 @@ class MethodArgumentSpaceFixer extends AbstractFixer
         }
 
         $nextToken = $tokens[$index + 1];
-        $afterNextToken = $tokens[$index + 2];
 
-        // after comma: must have only one space
-        //              except newline and multiline comments
-        if ($nextToken->isWhitespace()) {
-            if (!$afterNextToken->isComment()) {
-                $newContent = ltrim($nextToken->getContent(), " \t");
-                if ('' === $newContent) {
-                    $newContent = ' ';
-                }
-                if ($newContent !== $nextToken->getContent()) {
-                    $nextToken->setContent($newContent);
-                }
+        // Two cases for fix space after comma (exclude multiline comments)
+        //  1) multiple spaces after comma
+        //  2) no space after comma
+        if ($nextToken->isWhitespace() && !$this->isCommentLastLineToken($tokens, $index+2)) {
+            $newContent = ltrim($nextToken->getContent(), " \t");
+            if ('' === $newContent) {
+                $newContent = ' ';
             }
-        } else {
+            if ($newContent !== $nextToken->getContent()) {
+                $nextToken->setContent($newContent);
+            }
+        } elseif (!$nextToken->isWhitespace() && !$this->isCommentLastLineToken($tokens, $index+1)) {
             $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
         }
+    }
+
+    /**
+     * Check if last item of current line is a comment
+     *
+     * @param Tokens $tokens tokens to handle
+     * @param int    $index  index of token
+     * @return bool
+     */
+    private function isCommentLastLineToken(Tokens $tokens, $index)
+    {
+        return $tokens[$index]->isComment() && $tokens[$index]->getLine()+1 === $tokens[$index+1]->getLine();
     }
 
     /**

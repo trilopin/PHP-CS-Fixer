@@ -86,11 +86,24 @@ class MethodArgumentSpaceFixerTest extends AbstractFixerTestBase
             array(
                 '<?php array(10 , 20 ,30);',
             ),
+            //inline comments with spaces
+            array(
+                '<?php xyz($a=10, /*comment1*/ $b=2000, /*comment2*/ $c=30);',
+                '<?php xyz($a=10,    /*comment1*/ $b=2000,/*comment2*/ $c=30);',
+
+            ),
             // must keep align comments
             array(
                 '<?php function xyz(
                     $a=10,      //comment1
                     $b=20,      //comment2
+                    $c=30) {
+                }',
+            ),
+            array(
+                '<?php function xyz(
+                    $a=10,  //comment1
+                    $b=2000,//comment2
                     $c=30) {
                 }',
             ),
