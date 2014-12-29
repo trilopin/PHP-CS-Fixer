@@ -92,11 +92,12 @@ class MethodArgumentSpaceFixer extends AbstractFixer
      *
      * @param  Tokens $tokens tokens to handle
      * @param  int    $index  index of token
+     *
      * @return bool
      */
     private function isCommentLastLineToken(Tokens $tokens, $index)
     {
-        return $tokens[$index]->isComment() && preg_match('/\r?\n$/', $tokens[$index]->getContent());
+        return $tokens[$index]->isComment() && 1 === mb_substr_count($tokens[$index]->getContent(),"\n");
     }
 
     /**
