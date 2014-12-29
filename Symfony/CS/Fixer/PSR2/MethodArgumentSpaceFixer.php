@@ -92,6 +92,7 @@ class MethodArgumentSpaceFixer extends AbstractFixer
      *
      * @param  Tokens $tokens tokens to handle
      * @param  int    $index  index of token
+     *
      * @return bool
      */
     private function isCommentLastLineToken(Tokens $tokens, $index)
