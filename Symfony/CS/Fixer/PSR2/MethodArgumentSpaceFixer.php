@@ -90,9 +90,8 @@ class MethodArgumentSpaceFixer extends AbstractFixer
     /**
      * Check if last item of current line is a comment
      *
-     * @param  Tokens $tokens tokens to handle
-     * @param  int    $index  index of token
-     *
+     * @param Tokens $tokens tokens to handle
+     * @param int    $index  index of token
      * @return bool
      */
     private function isCommentLastLineToken(Tokens $tokens, $index)
