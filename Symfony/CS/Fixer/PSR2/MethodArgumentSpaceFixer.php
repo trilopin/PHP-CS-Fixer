@@ -74,7 +74,7 @@ class MethodArgumentSpaceFixer extends AbstractFixer
         // Two cases for fix space after comma (exclude multiline comments)
         //  1) multiple spaces after comma
         //  2) no space after comma
-        if ($nextToken->isWhitespace() && !$this->isCommentLastLineToken($tokens, $index+2)) {
+        if ($nextToken->isWhitespace() && !$this->isCommentLastLineToken($tokens, $index + 2)) {
             $newContent = ltrim($nextToken->getContent(), " \t");
             if ('' === $newContent) {
                 $newContent = ' ';
@@ -82,7 +82,7 @@ class MethodArgumentSpaceFixer extends AbstractFixer
             if ($newContent !== $nextToken->getContent()) {
                 $nextToken->setContent($newContent);
             }
-        } elseif (!$nextToken->isWhitespace() && !$this->isCommentLastLineToken($tokens, $index+1)) {
+        } elseif (!$nextToken->isWhitespace() && !$this->isCommentLastLineToken($tokens, $index + 1)) {
             $tokens->insertAt($index + 1, new Token(array(T_WHITESPACE, ' ')));
         }
     }
